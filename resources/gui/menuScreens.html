@@ -1,0 +1,27 @@
+
+<div id="IntroScreen" onclick="game.setGameScreen('MainMenuScreen');">
+    <h1>CJ's Game</h1>
+    <p>Press Enter to continue</p>
+</div>
+<div id="MainMenuScreen">
+    <ul>
+        <li onclick="createLevelList(document.getElementById('SelectLevelScreen')); game.setGameScreen('SelectLevelScreen')">Start new game</li>
+        <li onclick="game.setGameScreen('AboutCJScreen')">About</li>
+    </ul>
+</div>
+<div id="PauseMenuScreen">
+    <ul>
+        <li onclick="game.resumeGame()">Resume game</li>
+        <li onclick="game.restartLevel()">Restart level</li>
+        <li onclick="game.exitLevel(); game.setGameScreen('MainMenuScreen')">Exit to mainmenu</li>
+        <li onclick="game.setGameScreen('AboutCJScreen')">About</li>
+    </ul>
+</div>
+
+<div id="SelectLevelScreen" >
+    <p>Inga banor ännu</p>
+</div>
+<div id="LoadingScreen">
+    <p id="LoadingSceenMessage"></p>
+
+</div>

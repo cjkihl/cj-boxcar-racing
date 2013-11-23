@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CJ Game Engine</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script type="text/javascript" src="js/libs/prototype.js"></script>
+        <script type="text/javascript" src="js/libs/box2dweb.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/Game.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/TMXJsonReader.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/Level.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/ScreenManager.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/Camera.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/entities/AnimatedSprite.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/entities/Box.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/entities/Sprite.js"></script>
+        <script type="text/javascript" src="js/cj-game-engine/entities/Vehicle.js"></script>
+        <!--<script type="text/javascript" src="js/cjgame.min.js"></script>-->
+        <script>
+            document.observe('dom:loaded', function() {
+
+                var debugX = document.getElementById('debug-camera-x'), debugY = document.getElementById('debug-camera-y'),
+                        debugSprites = document.getElementById('debug-level-sprites');
+
+                window.game = new Game.Game2D({
+                    canvas: document.getElementById('cjg-game-canvas'),
+                    debug_canvas: document.getElementById('cjg-debug-canvas'),
+                    gui: document.getElementById('cjg-gui'),
+                    resourceUrl: 'resources',
+                    levels: [
+                        {name: 'lv1', title: '1: Crashing boxes'},
+                        {name: 'lv2', title: '2: Lava Fury'},
+                        {name: 'lv3', title: '3: Water Trouble'}
+                    ],
+                    events: {
+                        onLoaded: function() {
+                            console.log("loaded");
+
+                        },
+                        onUpdate: function() {
+                            debugX.innerHTML = game.currentLevel.camera.x;
+                            debugY.innerHTML = game.currentLevel.camera.y;
+                            if (game.currentLevel !== null)
+                                debugSprites.innerHTML = game.currentLevel.renderedSprites;
+                        }
+                    }
+                });
+            });
+        </script>
+        <style type="text/css">
+            canvas{border:1px solid #999;}
+            #cjg-game-container {
+                background: #fff1ce; /* Old browsers */
+                background: -moz-linear-gradient(top,  #fff1ce 0%, #d3e9ff 46%, #bfe8f9 50%, #9fd8ef 51%, #2ab0ed 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fff1ce), color-stop(46%,#d3e9ff), color-stop(50%,#bfe8f9), color-stop(51%,#9fd8ef), color-stop(100%,#2ab0ed)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #fff1ce 0%,#d3e9ff 46%,#bfe8f9 50%,#9fd8ef 51%,#2ab0ed 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #fff1ce 0%,#d3e9ff 46%,#bfe8f9 50%,#9fd8ef 51%,#2ab0ed 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #fff1ce 0%,#d3e9ff 46%,#bfe8f9 50%,#9fd8ef 51%,#2ab0ed 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #fff1ce 0%,#d3e9ff 46%,#bfe8f9 50%,#9fd8ef 51%,#2ab0ed 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff1ce', endColorstr='#2ab0ed',GradientType=0 ); /* IE6-9 */
+            }
+            #cjg-gui {
+                background: rgba(0,0,0,0.3);
+                text-align: center;
+                font-family: 'verdana',serif;
+                color: white;
+                text-shadow: 3px 3px 5px black;
+                cursor: pointer;
+            }
+            #cjg-gui h2 {vertical-align: middle; text-align: center; margin-top: 20%; font-size: 3em; color:#faf8c2;}
+            #cjg-ui span { font-size: 1em;}
+            #cjg-gui ul{list-style: none; text-indent: 0; padding: 0; margin: 0; }
+            #cjg-gui ul li, #cjg-gui p {font-size: 1.5em;}
+            #cjg-gui ul li:hover, #cjg-gui p:hover { text-shadow: 0px 0px 10px white; font-size:1.7em;}
+        </style>
+    </head>
+    <body>
+        <div id="cjg-game-container" style="position:relative; width:640px; height:480px">
+            
+            <!-- GUI Element -->    
+            <div id="cjg-gui" style="z-index: 3; position:absolute; left:0px; top:0px; width: 640px; height:480px;"> 
+            </div>  
+
+            <!-- Debug canvas -->
+            <canvas id="cjg-debug-canvas" style="z-index: 2; position:absolute; left:0px; top:0px;" width="640" height="480">
+                Your browser does not support canvas
+            </canvas>
+            <!-- Game canvas -->
+            <canvas id="cjg-game-canvas" style="z-index: 1; position:absolute; left:0px; top:0px;" width="640" height="480">
+            </canvas>
+        </div>
+        <h1>Box Car Racer</h1>
+        <p>Move the camera with <b>W,S,A,D</b> or <b>Up,Down,Left,Right</b></p>
+        <p>Camera pos: <br>
+            X:<span id="debug-camera-x"></span><br> 
+            Y: <span id="debug-camera-y"></span>
+        </p>
+        <p>Rendered Sprites: <span id="debug-level-sprites"></span></p> 
+    </body>
+</html>
