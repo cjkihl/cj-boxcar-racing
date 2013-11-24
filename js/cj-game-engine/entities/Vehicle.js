@@ -43,8 +43,8 @@ Game.Vehicle = Class.create({
         this.level = level;
         
         //Set images to level resources
-        level.resources.images[this.WHEEL_IMAGE] = 'resources/images/vehicle/wheel_1.png';
-        level.resources.images[this.BODY_IMAGE] = 'resources/images/vehicle/truck_1.png';
+        level.resources.images[this.WHEEL_IMAGE] = game.resourceUrl + '/images/vehicle/wheel_1.png';
+        level.resources.images[this.BODY_IMAGE] = game.resourceUrl + '/images/vehicle/truck_1.png';
         
         //Start creating the Box2d Fixtures and bodies
         var     bodyDef = new Game.b2BodyDef(), 

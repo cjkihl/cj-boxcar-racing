@@ -27,7 +27,6 @@ Game.Level = Class.create({
         
         //Create box2d world & gravity
         this.world = new Game.b2World(new Game.b2Vec2(0,Game.DEFAULT_GRAVITY),true);
-        this.debug = false;
         
         //Save the level score
         this.score = 0;

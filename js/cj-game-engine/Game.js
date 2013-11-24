@@ -90,6 +90,12 @@ Game.Game2D = Class.create({
            gui.appendChild(title);
            gui.appendChild(ul);
         },
+        loadingScreen: function(gui) {
+            'use strict';
+           var title = document.createElement('h2');
+           title.innerHTML = 'Loading..';
+           gui.appendChild(title);
+        },
         inGameScreen: function(gui) {
            'use strict';
            var title = document.createElement('h2'),
@@ -153,12 +159,10 @@ Game.Game2D = Class.create({
      */
     initialize: function(options) {
         'use strict';
-        //Canvas and screens
-        
-        
         this.canvas = options.canvas;
         this.ct = options.canvas.getContext('2d');
-        
+        this.debug = options.debug;
+        if(this.debug===undefined) {this.debug=false;}
         this.gui = options.gui;
         this.debug_ct = options.debug_canvas.getContext('2d');
         
@@ -201,6 +205,9 @@ Game.Game2D = Class.create({
      */
     loadLevel: function(levelName) {
        'use strict';
+       
+       game.screenManager.setScreen(game.screens.loadingScreen);
+       
         //Load the level with the TMX Json reader
         Game.TMXJsonReader.loadAsync(this.resourceUrl +'/levels/'+levelName+'.json', {
             
@@ -246,7 +253,7 @@ Game.Game2D = Class.create({
         if(game.currentLevel!==null) {
            game.currentLevel.update(dt); 
            game.currentLevel.render(game.ct, game.camera);
-           if(game.currentLevel.debug) {
+           if(game.debug) {
                 game.currentLevel.debugRender(game.debug_ct,game.camera); }
         }
         

@@ -14,7 +14,7 @@ Game.TMXJsonReader = (function TMXJsonReader() {
      * @param {function(level)} callback Will be called when the level is loaded
      */
     loadAsync = function(url, options) {
-        
+        resource_path = game.resourceUrl;
         new Ajax.Request(url,{
             method:'get',
             onSuccess: function(t) {

@@ -3,7 +3,7 @@
     <head>
         <title>CJ Game Engine</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <!--
         <script type="text/javascript" src="js/libs/prototype.js"></script>
         <script type="text/javascript" src="js/libs/box2dweb.js"></script>
         <script type="text/javascript" src="js/cj-game-engine/Game.js"></script>
@@ -14,24 +14,29 @@
         <script type="text/javascript" src="js/cj-game-engine/entities/AnimatedSprite.js"></script>
         <script type="text/javascript" src="js/cj-game-engine/entities/Box.js"></script>
         <script type="text/javascript" src="js/cj-game-engine/entities/Sprite.js"></script>
-        <script type="text/javascript" src="js/cj-game-engine/entities/Vehicle.js"></script>
-        <!--<script type="text/javascript" src="js/cjgame.min.js"></script>-->
+        <script type="text/javascript" src="js/cj-game-engine/entities/Vehicle.js"></script>-->
+        <script type="text/javascript" src="js/libs/prototype.js"></script>
+        <script type="text/javascript" src="js/libs/box2dweb.js"></script>
+        <script type="text/javascript" src="js/cjgame.min.js"></script>
         <script>
+            //This is the list of levels that will be visible in the game
+            var levels = [
+                        {name: 'lv1', title: '1: Crashing boxes'},
+                        {name: 'lv2', title: '2: Lava Fury'},
+                        {name: 'lv3', title: '3: Water Trouble'}
+                    ];
             document.observe('dom:loaded', function() {
 
                 var debugX = document.getElementById('debug-camera-x'), debugY = document.getElementById('debug-camera-y'),
                         debugSprites = document.getElementById('debug-level-sprites');
-
+                //Here we create the game object anf put inte the game settings        
                 window.game = new Game.Game2D({
                     canvas: document.getElementById('cjg-game-canvas'),
                     debug_canvas: document.getElementById('cjg-debug-canvas'),
                     gui: document.getElementById('cjg-gui'),
-                    resourceUrl: 'resources',
-                    levels: [
-                        {name: 'lv1', title: '1: Crashing boxes'},
-                        {name: 'lv2', title: '2: Lava Fury'},
-                        {name: 'lv3', title: '3: Water Trouble'}
-                    ],
+                    resourceUrl: 'resources', //The url to the resource folder
+                    levels: levels, //The list of levels
+                    degub: false, //Set to true if you want to activate debug-mode
                     events: {
                         onLoaded: function() {
                             console.log("loaded");
